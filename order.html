@@ -1,0 +1,75 @@
+---
+title: Order Page
+layout: default
+---
+
+<div id="site" class="container my-4">
+	<div id="content" class="card">
+		<div class="text-center card-header bg-primary text-light" id="full-site">Your Order</div>
+		<div class="card-body">
+		<div class="table-responsive text-nowrap">
+			<table id="checkout-cart" class="shopping-cart table table-bordered">
+				<thead>
+					<tr>
+						<th scope="col">Item</th>
+						<th scope="col">Qty</th>
+						<th scope="col">Price</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				</tbody>
+			</table>
+			<div id="pricing">
+				
+				<p id="shipping" style="display: none;">
+					<strong>Shipping</strong>: <span id="sshipping"></span>
+				</p>
+				
+				<p id="sub-total">
+					<strong>Total</strong>: <span id="stotal"></span>
+				</p>
+			</div>
+		 
+			<div id="user-details">
+				
+				<div id="user-details-content"></div>
+			</div>
+			{% if site.paypal_email and site.paypal_email != '' and site.currency_code and site.currency_code != 'INR' %}
+			<form id="paypal-form" action="" method="post">
+				<input type="hidden" name="cmd" value="_cart" />
+				<input type="hidden" name="upload" value="1" />
+				<input type="hidden" name="business" value="" />
+					
+				<input type="hidden" name="currency_code" value="" />
+				<input type="submit" id="paypal-btn" class="btn btn-primary btn-sm px-3 rounded-pill" value="Pay with PayPal" />
+			</form>
+			{% endif %}
+			{% if site.razorpay_key and site.razorpay_key != '' and site.currency_code and site.currency_code == 'INR' %}
+			<form action="{{ site.url }}" method="POST">
+				<script class="razor"
+					data-key="{{ site.razorpay_key }}" 
+    					data-currency="INR"
+    					data-buttontext="Pay with Razorpay"
+					data-name="{{ site.title }}"
+					data-image="{{ site.favicon }}"
+    					data-prefill.name=""
+    					data-prefill.email=""
+    					data-theme.color="#1266f1"
+				></script>
+				<input class="razor-hide" type="hidden" name="hidden">
+			</form>			
+			{% endif %}
+		</div> 
+		<div class="form">
+			<a class="btn btn-primary btn-sm px-3 rounded-pill email_checkout">Order via Email(COD)</a>
+			{% if site.mobile and site.mobile != '' %}
+			<a class="btn btn-primary btn-sm px-3 rounded-pill whatsapp_checkout">Order via Whatsapp(COD)</a>
+			{% else %}
+			<a class="btn btn-primary btn-sm px-3 rounded-pill">Whatsapp not available</a>
+			{% endif %}
+		</div>
+		</div>
+	</div>
+	</div>
+</div>

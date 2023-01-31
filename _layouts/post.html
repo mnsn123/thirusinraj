@@ -1,0 +1,69 @@
+---
+layout: default
+---
+
+<li>
+	<h2>{{ post.title }}</h2>
+	<p class="meta">{{ post.date | date_to_string }}</p>
+
+	<div class="post">
+	{{ post.content }}
+	</div>
+</li
+{%comment%}>	
+	{% for product in site.products %}
+      {% if product.title == page.title %}
+        {% assign thisPost = product %}
+        {% if forloop.index == 1 %}
+          {% assign prevflag = 0 %}
+          {% assign nextflag = 1 %}
+        {% elsif forloop.index == forloop.length %}
+          {% assign prevflag = 1 %}
+          {% assign nextflag = 0 %}
+        {% else %}
+          {% assign prevflag = 1 %}
+          {% assign nextflag = 1 %}
+        {% endif %}
+      {% endif %}
+      {% endfor %}
+
+      {% for product in site.products %}
+        {% if product.title == page.title %}
+          {% assign prevflag = 0 %}
+        {% endif %}
+        {% if prevflag == 1 %}
+          {% assign prevPost = product %}
+          {% assign page.previous = product %}
+        {% endif %}
+      {% endfor %}
+
+      {% if nextflag == 1 %}
+        {% for product in site.products %}
+          {% if foundPost == 1 %}
+            {% assign getNext = 1 %}
+          {% endif %}
+          {% if product.title == page.title %}
+            {% assign foundPost = 1 %}
+          {% endif %}
+          {% if getNext == 1%}
+            {% assign nextPost = product %}
+            {% assign page.next = product %}
+            {% assign foundPost = 0 %}
+            {% assign getNext = 0 %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      <div id="post-nav">
+          {% if prevPost.url %}
+          <a class="prev" rel="prev" href="{{ prevPost.url }}">
+              <span>&lt; {{ prevPost.title }}</span>
+          </a>
+          {% endif %}
+          {% if nextPost.url %}
+          <a class="next" rel="next" href="{{ nextPost.url }}">
+              <span>{{ nextPost.title }} &gt;</span>
+          </a>
+          {% endif %}
+      </div>
+      {%endcomment%}

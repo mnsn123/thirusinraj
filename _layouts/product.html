@@ -1,0 +1,92 @@
+---
+layout: default 
+---
+
+<div id="site">
+	<div id="content">
+		<div id="products" class="container my-4">
+      <main itemscope itemtype="http://schema.org/Product" id="full-site">
+        <div class="row">
+          <div class="col-md-6 mt-2">
+            <div class="card">
+		    <div class="card-header text-light text-center bg-primary">{{ page.title }}</div>
+		    <div class="card-body">
+              <section class="product-details">
+                <p class="item_price font-weight-bold text-primary lead">{% if site.currency_code and site.currency_code != '' %}{{ site.currency_code }}{% endif %} {{ page.price }}  per {{ page.quantity }} {{ page.unit }}</p>
+                {{ content }}
+                <div class="text-center my-4">
+                  <a href="https://www.facebook.com/sharer.php?u={{ site.url }}{{ page.url }}" target="_blank" onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250'); return false"><button type="button" class="btn btn-sm btn-facebook rounded-pill text-light"><i class="fa fa-facebook-f fa-lg text-light"></i> Share</button></a>
+                  <a href="whatsapp://send?text={{ site.url}}{{ page.url }}" data-action="share/whatsapp/share"><button type="button" class="btn btn-sm text-light rounded-pill btn-whatsapp"><i class="fa fa-whatsapp fa-lg text-light"></i> Share</button></a>
+                  <button class="btn btn-sm btn-primary px-3 rounded-pill d-lg-none text-default" type="submit" value="submit"><i class="fa fa-share-alt fa-lg share-btn5 text-light"></i></button>
+                </div>
+              </section>
+		    </div>
+            </div>
+          </div>
+          <div class="col-md-6 my-2">
+            <div class="card card-body">
+              <section class="product-image">
+                <div class="styles">
+                  {% for style in page.styles %}
+                  <div id="product-{{ forloop.index }}" class="style" {% unless forloop.first %}style="display: none"{% endunless %}>
+                    <span class="zoom-2"><img width="100%" height="400px" src="{{ style.image_path }}" itemprop="image"></span>
+                  </div>
+                  {% endfor %}
+                </div>
+                <div class="style-picker">
+                  {% for style in page.styles %}
+                  <div id="product-{{ forloop.index }}"{% if forloop.first %} class="item_color"{% endif %} style="background-color: {{ style.color }}"><span class="display-none">{{ style.name }}</span></div>
+                  {% endfor %}
+                </div>
+                <div class="product-description" data-name="{{ page.title }}" data-price="{{ page.price }}">
+                <p class="item_price font-weight-bold text-primary lead">{% if site.currency_code and site.currency_code != '' %}{{ site.currency_code }}{% endif %} {{ page.price }}  per {{ page.quantity }} {{ page.unit }}</p>
+                <form class="add-to-cart" action="{{ site.url }}/cart" method="get">
+                    <p class="margin-bottom-0">How many packs:</p>
+                    <div class="qid">
+                      <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+                      <input type="number" class="qty" id="number" value="1" />
+                      <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+                    </div>
+                    <!-- <input type="text" name="qty-1" id="qty-1" class="qty" value="1" /> -->
+                    <p><input type="submit" value="Add to cart" class="btn btn-primary btn-md rounded-pill" /></p>
+                  </form>
+                  
+                  <script>
+                    document.querySelector('.share-btn5').addEventListener('click', function() {
+                        var tit = `{{ page.title }}`;
+                        const title = tit.replace(/<\/?[^>]+(>|$)/g, "");
+                        const url = '{{ site.url }}{{ page.url }}';
+                      if(navigator.share) {
+                        navigator.share({
+                          title,
+                          url
+                        })
+                        .then(() => console.log('Success'))
+                        .catch((error) => console.log('Error sharing', error));
+                      }
+                    });
+                  </script>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+          {% if site.fb_appid and site.fb_appid != '' %}
+          <div class="card card-body py-4">
+            <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.8&appId={{ site.fb_appid }}";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+            <div class="fb-comments" data-href="{{ site.url }}{{ page.url }}" data-numposts="20" data-width="100%" data-theme="light" data-order-by="reverse_time"></div>
+          </div>
+          {% endif %}
+        </main>		
+		</div>
+	</div>
+</div>
+
+

@@ -1,0 +1,34 @@
+title: Your website title
+url: "https://monsoonmalabar.com/thirusinraj"
+email: thirunavu12000@gmail.com
+markdown: kramdown
+mobile: ''
+country: ''
+location: ''
+sass:
+  sass_dir: _sass
+  style: compressed
+collections:
+  products:
+    output: true
+defaults:
+  - scope:
+      type: posts
+    values:
+      layout: product
+  - scope:
+      type: products
+    values:
+      layout: post
+plugins_dir:
+  - jekyll-sitemap
+  - jekyll-paginate
+encoding: UTF-8
+include: ['.well-known']
+permalink: /products/:title/
+paginate: 4
+paginate_path: 'page/:num/'
+favicon: 'https://monsoonmalabar.com/thirusinraj/logo.png'
+paypal: ''
+analytics: ''
+adsense: ''

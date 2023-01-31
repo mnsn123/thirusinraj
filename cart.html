@@ -1,0 +1,39 @@
+---
+title: Shopping Cart
+layout: default
+---
+<div id="site" class="container my-4">
+	<div id="content" class="card">
+		<div class="text-center card-header bg-primary text-light" id="full-site">Shopping Cart</div>
+		<div class="card-body">
+		<form id="shopping-cart" action="{{ site.url }}/cart" method="get">
+			<div class="table-responsive text-nowrap">
+				<table class="shopping-cart table table-bordered">
+				<thead>
+					<tr>
+						<th scope="col">Item</th>
+						<th scope="col">Qty</th>
+						<th scope="col" colspan="2">Price</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				</tbody>
+				</table>
+			</div>
+			<p id="sub-total">
+				<strong>Total</strong>: <span id="stotal"></span>
+			</p>
+			<div id="shopping-cart-actions" class="text-center">
+				<input type="submit" name="update" id="update-cart" class="btn btn-sm px-3 rounded-pill btn-primary" value="Update Cart" />
+				<input type="submit" name="delete" id="empty-cart" class="btn btn-sm px-3 rounded-pill btn-primary" value="Empty Cart" />
+				<a href="{{ site.url }}/index.html" class="btn btn-sm px-3 rounded-pill btn-primary">Continue Shopping</a>
+				<a href="{{ site.url }}/checkout" class="btn btn-sm px-3 rounded-pill btn-primary">Go To Checkout</a>
+			</div>
+		</form>
+		</div>
+	</div>
+	
+	
+
+</div>

@@ -1,0 +1,24 @@
+---
+layout: none
+---
+
+{
+  "dir": "auto",
+  "name": {{ site.title | smartify | jsonify }},
+  "short_name": {{ site.title | smartify | jsonify }},
+  "scope": "{{ site.url }}/",
+  "lang": "en",
+  "description": "The neighbourhood friend",
+  "icons": [
+    {
+      "src": "{% if site.favicon %}{{ site.favicon }}{% else %}{{ site.url }}\/logo.png{% endif %}",
+      "sizes": "512x512",
+      "type": "image\/png"
+    }
+  ],
+  "theme_color": "#1266f1",
+  "background_color": "#fdfdfd",
+  "start_url": "{{ site.url }}\/?external=false",
+  "display": "standalone",
+  "orientation": "any"
+}

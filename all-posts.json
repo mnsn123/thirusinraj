@@ -1,0 +1,10 @@
+---
+layout: none
+---
+{
+  "posts" : [
+    {% for post in site.products %}
+    "{{ site.url }}{{ post.url }}"{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}

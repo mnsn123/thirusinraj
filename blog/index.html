@@ -1,0 +1,30 @@
+---
+title: Blog
+layout: default
+---
+<div class="container py-2" id="site">
+  <main class="content" id="full-site">
+    <article class="page">
+      {% for post in site.products %}
+      <div class="card card-body my-4">
+        <article class="entry" itemscope itemtype="http://schema.org/CreativeWork">
+	        <header class="entry-header">
+            <h2 class="entry-title text-center" itemprop="headline">{{ post.title }}</h2>
+            <p class="entry-meta">
+              <time class="entry-time" itemprop="datePublished" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
+            </p>
+          </header>
+          <div class="entry-content" itemprop="text">
+            <p>{{ post.content }}</p>
+          </div>
+        </article>
+      </div>
+      {% else %}
+      <div class="card card-body text-center">
+        <p>No post found</p>
+      </div>
+      {% endfor %}
+    </article>
+  <!-- <div class="infinite-spinner"></div> -->
+  </main>
+</div>
